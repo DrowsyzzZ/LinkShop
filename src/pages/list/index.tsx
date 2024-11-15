@@ -1,7 +1,30 @@
 import LinkCard from "./components/LinkCard";
 import SearchBar from "./components/SearchBar";
+import { GetServerSideProps } from "next";
+import { getLinkshops } from "@/api/linkshop";
+import { Linkshop } from "@/types/linkshopType";
 
-const ListPage = () => {
+interface ListPageProps {
+  initialData: Linkshop[];
+  cursor: number | null;
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await getLinkshops();
+
+  if (!res?.list) return { notFound: true };
+  if (!res?.nextCursor) return { notFound: true };
+
+  return {
+    props: {
+      initialData: res.list,
+      cursor: res.nextCursor,
+    },
+  };
+};
+
+const ListPage = ({ initialData, cursor }: ListPageProps) => {
+  console.log("data: ", initialData);
   return (
     <div>
       <SearchBar />
@@ -9,8 +32,9 @@ const ListPage = () => {
         상세필터
       </p>
       <div className="grid grid-cols-1 gap-6 PC:grid-cols-2 Tablet:gap-4 Mobile:gap-2">
-        <LinkCard />
-        <LinkCard />
+        {initialData.map((list) => (
+          <LinkCard key={list.id} info={list} />
+        ))}
       </div>
     </div>
   );
