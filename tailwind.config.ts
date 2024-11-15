@@ -19,9 +19,9 @@ export default {
       colors: {
         background: "#ffffff",
         foreground: "#14151a",
-        "gray-100": "#a2a2ac",
-        "gray-200": "#888790",
-        "white-100": "#fafafb",
+        gray100: "#a2a2ac",
+        gray200: "#888790",
+        white100: "#fafafb",
         red: "#fb545b",
         blue: "#3e45ec",
       },
