@@ -1,5 +1,14 @@
-const Home = () => {
-  return <div>링크샵!</div>;
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+const IndexPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/list");
+  }, [router]);
+
+  return null;
 };
 
-export default Home;
+export default IndexPage;
