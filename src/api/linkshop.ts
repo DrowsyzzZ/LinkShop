@@ -3,13 +3,13 @@ import instance from "./axios";
 
 interface GetLinkshopsQuery {
   keyword?: string;
-  orderBy: "recent" | "likes" | "productsCount";
+  orderBy?: "recent" | "likes" | "productsCount";
   cursor?: number;
 }
 
 export const getLinkshops = async (
   query: GetLinkshopsQuery = { orderBy: "recent" },
-): Promise<GetLinkshops | undefined> => {
+): Promise<GetLinkshops> => {
   const { keyword = "", orderBy = "recent", cursor } = query;
 
   const params = new URLSearchParams();
